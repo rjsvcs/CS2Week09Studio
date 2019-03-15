@@ -1,9 +1,13 @@
+package tcpip;
+
 import java.io.IOException;
 import java.net.Socket;
+import java.net.ServerSocket;
 
-public class Connector {
+public class Listener {
     public static void main(String[] args) throws IOException {
-        Socket sock = new Socket("bobby.rit.edu", 33075);
+        ServerSocket server = new ServerSocket(12347);
+        Socket client = server.accept();
         System.out.println("Connected!");
     }
 }
