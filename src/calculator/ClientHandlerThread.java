@@ -22,28 +22,26 @@ public class ClientHandlerThread implements Runnable {
 
     @Override
     public void run() {
-        try {
-            String request = scanner.nextLine();
-            String[] tokens = request.split(" ");
-            if (tokens.length != 3) {
-                writer.println("error bad request");
-            } else {
-                try {
-                    float operand1 = Float.parseFloat(tokens[1]);
-                    float operand2 = Float.parseFloat(tokens[2]);
-                    writer.println("result " + calculator.calculate(tokens[0],
-                            operand1, operand2));
-                } catch (Exception iae) {
-                    writer.println("error " + iae.getLocalizedMessage());
-                }
-            }
-            writer.flush();
-        } finally {
+        String request = scanner.nextLine();
+        String[] tokens = request.split(" ");
+        if (tokens.length != 3) {
+            writer.println("error bad request");
+        } else {
             try {
-                client.close();
-            } catch (IOException e) {
-                // squash
+                float operand1 = Float.parseFloat(tokens[1]);
+                float operand2 = Float.parseFloat(tokens[2]);
+                writer.println("result " + calculator.calculate(tokens[0],
+                        operand1, operand2));
+            } catch (Exception iae) {
+                writer.println("error " + iae.getLocalizedMessage());
             }
+        }
+        writer.flush();
+
+        try {
+            client.close();
+        } catch (IOException e) {
+            // squash
         }
     }
 }

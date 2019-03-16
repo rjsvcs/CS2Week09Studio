@@ -37,9 +37,10 @@ public class MultithreadedCalculatorServer {
 
         while(true) {
             Socket client = server.accept();
-            ClientHandlerThread thread =
+            ClientHandlerThread handler =
                     new ClientHandlerThread(client, calculator);
-            new Thread(thread).start();
+            Thread thread = new Thread(handler);
+            thread.start();
         }
     }
 }
