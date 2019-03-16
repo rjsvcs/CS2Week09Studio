@@ -84,10 +84,14 @@ public class GamePlayer {
      *
      * @return True if the user opted to quite the game; false otherwise.
      */
-    private static boolean quit(Scanner scanner) {
+    private boolean quit(Scanner scanner) {
         System.out.print("Are you sure (Y/N)? ");
         String response = scanner.nextLine();
-        return response.equalsIgnoreCase("y");
+        boolean shouldQuit = response.equalsIgnoreCase("y");
+        if(shouldQuit) {
+            game.quit();
+        }
+        return shouldQuit;
     }
 
     /**

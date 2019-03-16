@@ -44,4 +44,12 @@ public class GuessingGameImpl implements GuessingGame {
                     GuessResult.TOO_LOW : GuessResult.TOO_HIGH;
         }
     }
+
+    /**
+     * Has no real effect on the game.
+     */
+    @Override
+    public void quit() {
+
+    }
 }

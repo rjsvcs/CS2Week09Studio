@@ -33,4 +33,10 @@ public interface GuessingGame {
      *
      */
     public GuessResult guess(int number);
+
+    /**
+     * Called to clean up any resources that are being used before ending the
+     * game. OPTIONAL.
+     */
+    public void quit();
 }
