@@ -2,7 +2,6 @@ package tcpip;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class EchoClient {
     public static void main(String[] args) throws IOException {
@@ -14,8 +13,9 @@ public class EchoClient {
         writer.println("Hello!");
         writer.flush();
         System.out.println("Sent! Waiting for response...");
-        InputStream inputStream = sock.getInputStream();
-        Scanner scanner = new Scanner(inputStream);
-        System.out.println("received: " + scanner.nextLine());
+        InputStream input = sock.getInputStream();
+        InputStreamReader iReader = new InputStreamReader(input);
+        BufferedReader reader = new BufferedReader(iReader);
+        System.out.println("received: " + reader.readLine());
     }
 }
