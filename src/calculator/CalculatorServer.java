@@ -1,7 +1,6 @@
 package calculator;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -39,9 +38,11 @@ public class CalculatorServer {
         ServerSocket server = new ServerSocket(8009);
 
         Socket client = server.accept();
-        Scanner scanner = new Scanner(client.getInputStream());
+        InputStream input = client.getInputStream();
+        InputStreamReader iReader = new InputStreamReader(input);
+        BufferedReader reader = new BufferedReader(iReader);
         PrintWriter writer = new PrintWriter(client.getOutputStream());
-        String request = scanner.nextLine();
+        String request = reader.readLine();
         String[] tokens = request.split(" ");
         if (tokens.length != 3) {
             writer.println("error bad request");
