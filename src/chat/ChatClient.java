@@ -1,18 +1,19 @@
 package chat;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class ChatClient implements Runnable {
     private Socket socket;
-    private Scanner scanner;
+    private BufferedReader reader;
     private PrintWriter writer;
 
     public ChatClient(Socket client) throws IOException {
         this.socket = client;
-        scanner = new Scanner(client.getInputStream());
+        InputStream input = client.getInputStream();
+        InputStreamReader iReader = new InputStreamReader(input);
+        reader = new BufferedReader(iReader);
         writer = new PrintWriter(client.getOutputStream());
     }
 
@@ -32,9 +33,14 @@ public class ChatClient implements Runnable {
 
     @Override
     public void run() {
-        while(true) {
-            String message = scanner.nextLine();
-            System.out.println(message);
+        try {
+            while (true) {
+                String message = reader.readLine();
+                System.out.println(message);
+            }
+        } catch(IOException exception) {
+            System.err.println("Something went wrong!");
+            exception.printStackTrace();
         }
     }
 }
