@@ -1,0 +1,3 @@
+cd Documents
+mkdir Assignment01
+cd Assignmen01
